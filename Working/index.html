@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="lib/codebeautifier.css"/>
+    <title>codebeautifier</title>
+    <style id="style">
+        *{margin:0;padding:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}body{font-size:14px}.row:after,.row:before{content:' ';display:table}.row:after{clear:both}.col{float:left;width:50%;border:1px solid red}.box-title{background-color:#eee;padding:5px}.box-body{height:320px}.CodeMirror{height:100%}
+    </style>
+</head>
+<body>
+
+<div class="row">
+    <div class="col">
+        <div class="box">
+            <h5 class="box-title">CSS</h5>
+            <h5 class="box-body" id="test1"></h5>
+        </div>
+    </div>
+    <div class="col">
+        <div class="box">
+            <h5 class="box-title">JavaScript</h5>
+            <h5 class="box-body" id="test2"></h5>
+        </div>
+    </div>
+    <div class="col">
+        <div class="box">
+            <h5 class="box-title">HTML</h5>
+            <h5 class="box-body" id="test3"></h5>
+        </div>
+    </div>
+    <div class="col">
+        <div class="box">
+            <h5 class="box-title">XML</h5>
+            <h5 class="box-body" id="test4"></h5>
+        </div>
+    </div>
+    <div class="col">
+        <div class="box">
+            <h5 class="box-title">JSON</h5>
+            <h5 class="box-body" id="test5"></h5>
+        </div>
+    </div>
+    <div class="col">
+        <div class="box">
+            <h5 class="box-title">JSON</h5>
+            <h5 class="box-body" id="test6"></h5>
+        </div>
+    </div>
+</div>
+
+<script src="lib/codebeautifier.js"></script>
+<script id="script">
+    var data={a:void 0,b:!0,c:1,d:0,e:"123",f:null,g:{b:!0,c:1,d:0,e:"123",f:null},h:[{b:!0,c:1,d:0,e:"123",f:null},{b:!0,c:1,d:0,e:"123",f:null}]};codebeautifier({element:document.getElementById("test1"),type:"css",text:document.getElementById("style").innerHTML}),codebeautifier({element:document.getElementById("test2"),type:"javascript",text:document.getElementById("script").innerHTML}),codebeautifier({element:document.getElementById("test3"),type:"html",text:document.documentElement.outerHTML}),codebeautifier({element:document.getElementById("test4"),type:"xml",text:'<?xml version="1.0" encoding="ISO-8859-1"?><note><to>George</to><from>John</from><heading>Reminder</heading><body>Dont forget the meeting!</body></note>'}),codebeautifier({element:document.getElementById("test5"),type:"json",text:JSON.stringify(data),indent:"  "});var html=codebeautifier({type:"json",text:JSON.stringify(data),indent:"  "});document.getElementById("test6").innerHTML=html;
+
+</script>
+</body>
+</html>

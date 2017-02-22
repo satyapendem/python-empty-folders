@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Code HighLighter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+  <script src="codemirror/lib/codemirror.js"></script>
+  <script src="codemirror/lib/util/formatting.js"></script>
+  
+  <link rel="stylesheet" href="codemirror/doc/docs.css">
+  <link rel="stylesheet" href="lib/codebeautifier.css"/>
+  <style>
+    textarea {
+     resize: none;
+   }
+ </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Code Highlighter</h2>
+
+    <form>
+      <div class="form-group">
+
+
+        <label for="comment"><h3>Paste your code Here:</h3></label>
+        
+        <textarea class="form-control" id="code" rows="6"></textarea><br>
+        <button type="button" id="convert" class="btn btn-primary">Submit</button>
+
+      </div>
+    </form>
+    <div id="box">
+      <label for="comment"><h3>Copy code from here:</h3></label>
+      <button class="btn" id="codecp">Copy</button><br>
+      <div id="show">
+
+      </div>
+      <div id="script">
+
+      </div>
+
+    </div>
+    
+    <script src="lib/codebeautifier.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      var copyBtn = document.querySelector('#codecp');
+      copyBtn.addEventListener('click', function () {
+       var urlField = document.querySelector('#show');
+
+       urlField.select();
+
+     document.execCommand('copy'); // or 'cut'
+   }, false);
+      
+      $(function(){
+        $("#box").hide();
+        $("#convert").on("click", function(){
+
+          var program = $("textarea#code").val();
+          var regex_html = /<\/?[\w\s="/.':;#-\/\?]+>/gi;
+          var regex_css  = /{([^}]*)}/gm;
+          if(regex_html.test(program)==true){
+            Html(program);
+            console.log(program);
+          }
+          else if(regex_css.test(program)==true)
+          {
+            console.log(program);
+            CSS(program);
+          }
+          else
+          {
+            var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+              lineNumbers: false,
+
+            });
+
+
+            CodeMirror.commands["selectAll"](editor);
+            function getSelectedRange() {
+              return { from: editor.getCursor(true), to: editor.getCursor(false) };
+            }
+
+            function autoFormatSelection() {
+              var range = getSelectedRange();
+              var x=editor.autoFormatRange(range.from, range.to);
+
+            }
+            
+          }
+
+          
+       });
+      })
+      function CSS(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'css',
+          text: program
+        });
+      }
+      function JavaScrit(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'javascript',
+          text: program
+        });
+      }
+      function Html(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'html',
+          text: program
+        });
+      }
+      function Json(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'json',
+          text: program
+        });
+      }
+      
+
+    </script>
+  </body>
+  </html>

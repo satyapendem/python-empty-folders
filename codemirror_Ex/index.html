@@ -1,0 +1,69 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Demo_Format</title>
+  <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+  <script src="codemirror/lib/codemirror.js"></script>
+  <script src="codemirror/lib/util/formatting.js"></script>
+  <script src="codemirror/mode/css/css.js"></script>
+  <script src="codemirror/mode/xml/xml.js"></script>
+  <script src="codemirror/mode/javascript/javascript.js"></script>
+  <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>
+  <link rel="stylesheet" href="codemirror/doc/docs.css">
+
+  <style type="text/css">
+    .CodeMirror {
+      border: 1px solid #eee;
+    }
+    td {
+      padding-right: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1></h1>
+
+  <form><textarea id="code" name="code"><script> function (s,e){ for(var i=0; i < 1; i++) test("test();a=1");} </script>
+    <script>
+      function test(c){  for (var i = 0; i < 10; i++){	          process("a.b();c = null;", 300);}
+    }
+  </script>
+  <table><tr><td>test 1</td></tr><tr><td>test 2</td></tr></table>
+  <script> function test() { return 1;} </script>
+  <style> .test { font-size: medium; font-family: monospace; }
+  </style></textarea></form>
+  <table>
+    <tr>
+      <td>
+        <a href="javascript:autoFormatSelection()">
+         <button> Format </button>
+       </a>
+     </td>
+     
+   </tr>
+ </table>
+</p>    
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: false,
+    
+  });
+  
+  
+  CodeMirror.commands["selectAll"](editor);
+  function getSelectedRange() {
+    return { from: editor.getCursor(true), to: editor.getCursor(false) };
+  }
+  
+  function autoFormatSelection() {
+    var range = getSelectedRange();
+    var x=editor.autoFormatRange(range.from, range.to);
+
+  }
+  
+</script>
+
+</body>
+</html>

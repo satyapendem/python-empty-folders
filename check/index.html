@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Code HighLighter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="lib/codebeautifier.css"/>
+  <style>
+    textarea {
+     resize: none;
+   }
+ </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Code Highlighter</h2>
+
+    <form>
+      <div class="form-group">
+
+        <label for="sel1">Select Type:</label>
+        <select class="form-control" id="language">
+          <option value="css">CSS</option>
+          <option value="js">JavaScript</option>
+          <option value="html">HTML</option>
+          <option value="xml">XML</option>
+          <option value="json">JSON</option>
+          <option value="java">Java</option>
+        </select>
+        <label for="comment"><h3>Paste your code Here:</h3></label>
+        
+        <textarea class="form-control" id="code" rows="6" id="comment"></textarea><br>
+        <button type="button" id="convert" class="btn btn-primary">Submit</button>
+
+      </div>
+    </form>
+    <div id="box">
+      <label for="comment"><h3>Copy code from here:</h3></label>
+      <button class="btn" id="codecp">Copy</button>
+      <span id="show">
+
+      </span>
+    </div>
+    <script src="lib/codebeautifier.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        var copyBtn = document.querySelector('#codecp');
+        copyBtn.addEventListener('click', function () {
+        var urlField = document.querySelector('#show');
+        var range = document.createRange();  
+        range.selectNode(urlField);
+        window.getSelection().addRange(range);
+        console.log(document.execCommand('copy'));
+      }, false);
+      
+      $(function(){
+        $("#box").hide();
+        $("#convert").on("click", function(){
+          var type=document.getElementById('language');
+          type=type.options[type.selectedIndex].value;
+          var program = $("textarea#code").val();
+          if ('css'==type) 
+            CSS(program);
+          if ('js'==type) 
+           JavaScrit(program);
+         if ('html'==type) 
+           Html(program);
+         if ('xml'==type)
+           Xml(program);
+         if ('json'==type)
+           Json(program);
+         if ('java'==type)
+           Java(program);
+       });
+      })
+      function CSS(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'css',
+          text: program
+        });
+      }
+      function JavaScrit(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'javascript',
+          text: program
+        });
+      }
+      function Html(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'html',
+          text: program
+        });
+      }
+      function Json(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'json',
+          text: program
+        });
+      }
+      function Java(program)
+      {
+        $("#box").show();
+        codebeautifier({
+          element: document.getElementById('show'),
+          type: 'java',
+          text: program
+        });
+      }
+
+    </script>
+  </body>
+  </html>

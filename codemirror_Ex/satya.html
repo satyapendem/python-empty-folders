@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/lib/codemirror.js"></script>
+</head>
+<body>
+<textarea rows="10" id="code" cols="20">
+ </textarea><br>
+ <input type="button" name="" value="format" onclick="format();">
+ <script type="text/javascript">
+   function format()
+   {
+ 	var e = CodeMirror.fromTextArea(document.getElementById("code"), {});
+
+   for (var i=0;i<e.lineCount();i++) 
+   	{
+   	 e.indentLine(i); 
+   	}
+  }
+ </script>
+</body>
+</html>
