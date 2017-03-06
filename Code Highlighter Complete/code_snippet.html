@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Code Snippet</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <link rel="stylesheet" href="lib/neo.css">
+  <script src="lib/codemirror.js"></script>
+  <script src="lib/util/formatting.js"></script>
+  <script src="lib/css.js"></script>
+  <script src="lib/xml.js"></script>
+  <script src="lib/javascript.js"></script>
+  <script src="lib/htmlmixed.js"></script>
+  <link rel="stylesheet" href="lib/docs.css">
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#myModal").on('shown.bs.modal', function(){
+        $(this).find('input[type="text"],textarea').focus();
+        document.getElementById("code_form").reset();
+      });
+    });
+  </script>
+  <style type="text/css">
+    .bs-example{
+    	margin: 20px;
+    }
+    .CodeMirror {
+      border: 1px solid #eee;
+      height: auto;
+    }
+    td {
+      padding-right: 20px;
+    }
+    .code {
+      margin: 10px 0;
+      
+    }
+    .code.icons {
+      margin: 10px 0;
+      
+    }
+
+    .inline {
+      display: inline-block;
+      margin: 0;
+    }
+     .pre_icons
+     {
+    position: absolute;
+    right: 18px;
+    margin-top: -35px;
+    z-index: 100;
+     }
+  </style>
+</head>
+<body>
+  <div class="bs-example">
+    <!-- Button HTML (to Trigger Modal) -->
+    <a href="#myModal" id="codesnippet" class="btn btn-lg btn-primary" data-toggle="modal">Code Snippet</a>
+    
+    <div id="code_show" class="code"></div>
+    <div  class="pre_icons" style="display:none">
+       <button class="save"  style="background-color:transparent; border-color:transparent;" name=""><img src="down.png" height="35" /></button>
+       <button class="edit"  style="background-color:transparent; border-color:transparent;" name=""><img src="edit.png" height="35" /></button>  
+   </div>
+   
+   <!-- Modal HTML -->
+   <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title" align="center">Code Snippet</h4>
+        </div>
+        <div class="modal-body">
+          <form id="code_form">
+            <div class="form-group">
+              <label for="inputName">Name</label>
+              <input type="text" class="form-control" id="fileName">
+            </div>
+            <div class="form-group">
+              <label for="sel1">Type:</label>
+              <select class="form-control" id="language">
+                <option value="plaintext">Plain Text</option>
+                <option value="c">C</option>
+                <option value="java">Java</option>
+                <option value="c++">C++</option>
+                <option value="php">PHP</option>
+                <option value="markdown">Markdown</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="inputComment">Program</label>
+              <textarea class="form-control"  rows="4" id="code" name="code"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="button" id="show" class="btn btn-primary">Create Snippet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="script.js">
+</script>     
+</body>
+</html>                                		
