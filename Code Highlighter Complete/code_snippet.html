@@ -9,19 +9,13 @@
   <link rel="stylesheet" href="lib/codemirror.css">
   <link rel="stylesheet" href="lib/neo.css">
   <script src="lib/codemirror.js"></script>
-  <script src="lib/util/formatting.js"></script>
   <script src="lib/css.js"></script>
   <script src="lib/xml.js"></script>
   <script src="lib/javascript.js"></script>
   <script src="lib/htmlmixed.js"></script>
   <link rel="stylesheet" href="lib/docs.css">
   <script type="text/javascript">
-    $(document).ready(function(){
-      $("#myModal").on('shown.bs.modal', function(){
-        $(this).find('input[type="text"],textarea').focus();
-        document.getElementById("code_form").reset();
-      });
-    });
+    
   </script>
   <style type="text/css">
     .bs-example{
@@ -51,7 +45,7 @@
      {
     position: absolute;
     right: 18px;
-    margin-top: -35px;
+    margin-top: -31px;
     z-index: 100;
      }
   </style>
@@ -59,12 +53,12 @@
 <body>
   <div class="bs-example">
     <!-- Button HTML (to Trigger Modal) -->
-    <a href="#myModal" id="codesnippet" class="btn btn-lg btn-primary" data-toggle="modal">Code Snippet</a>
+    <a href="#myModal" id="codesnippet" data-toggle="modal"><img src="coding.png" height="35" /></a>
     
     <div id="code_show" class="code"></div>
     <div  class="pre_icons" style="display:none">
-       <button class="save"  style="background-color:transparent; border-color:transparent;" name=""><img src="down.png" height="35" /></button>
-       <button class="edit"  style="background-color:transparent; border-color:transparent;" name=""><img src="edit.png" height="35" /></button>  
+       <button class="save"  style="background-color:transparent; border-color:transparent;" name=""><img src="down.png" height="25" /></button>
+       <button class="edit"  style="background-color:transparent; border-color:transparent;" name=""><img src="edit.png" height="25" /></button>  
    </div>
    
    <!-- Modal HTML -->

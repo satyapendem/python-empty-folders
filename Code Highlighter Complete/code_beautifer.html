@@ -63,6 +63,7 @@
           var program = $("textarea#code").val();
           var regex_html = /<\/?[\w\s="/.':;#-\/\?]+>/gi;
           var regex_css  = /{([^}]*)}/gm;
+
           if(regex_html.test(program)==true){
             Html(program);
             console.log(program);
@@ -74,7 +75,17 @@
           }
           else{
             $("#box").show();
-            $("#box").text(program);
+            $("#show").each(function() {
+              var $this = $(this),
+              $code = $this.html(),
+              $unescaped = $('<div/>').html($code).text();
+              $this.empty();
+              CodeMirror(this, {
+                value: $unescaped,
+                lineNumbers: true,
+                readOnly: "nocursor"
+              });   
+            });
           }
        });
       })

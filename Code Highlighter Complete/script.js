@@ -25,10 +25,10 @@ editor.setSize(540, 200);
      var code_div = $(".code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
-        $(code_div).append(program);
-       console.log("if");
-     }
-     else{
+      $(code_div).append(program);
+      console.log("if");
+    }
+    else{
       code_div = document.createElement('div');
       code_div.setAttribute('class','code');
       // code_div.setAttribute('id',ids);
@@ -36,10 +36,9 @@ editor.setSize(540, 200);
       $(".code").last().after(code_div);
       // $("#"+ids).append(new_ele);
       console.log("else");
-    
-   }
-     
-     $(code_div).each(function() {
+
+    }
+    $(code_div).each(function() {
       var $this = $(this),
       $code = $this.html(),
       $unescaped = $('<div/>').html($code).text();
@@ -52,14 +51,57 @@ editor.setSize(540, 200);
       });   
     });
 
-     new_ele = $('.pre_icons').clone();
+    new_ele = $('.pre_icons').clone();
      //new_ele.removeAttr('id');
-    $(code_div).append(new_ele);
+     $(code_div).append(new_ele);
+     /*Click events for edit and download*/
+     
+      $('.edit').click(function(event){
+           $('#myModal').modal('show');
+           edit_div=$(this).parents('div.pre_icons').siblings('div.CodeMirror').find('div.CodeMirror-code');
+           edit_code = $(edit_div).clone();
+           content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
+           txt_for_update=$(edit_code).text();
+           console.log(txt_for_update);
+           editor.setValue(txt_for_update);
+           //$(code_div).innerHTML(txt_for_update);
+      });
+     $('.save').click(function(){
+      down_div=$(this).parents('div.pre_icons').siblings('div.CodeMirror').find('div.CodeMirror-code');
+           down_code = $(down_div).clone();
+           console.log(down_code);
+           content_code = $(down_code).find('div.CodeMirror-linenumber').remove();
+           txt_for_down=$(down_code).text();
+            console.log(txt_for_down);
+      var type=document.getElementById('language');
+      type=type.options[type.selectedIndex].value;
+      file_name=document.getElementById('fileName').value;
+      console.log(file_name);
+      if(file_name=="")
+      {
+        file_para="program";
+      }
+      else
+      {
+        file_para=file_name;
+      }
+      switch(type){
+        case "c": saveTextAsFile(file_para,"c");
+        break;
+        case "java": saveTextAsFile(file_para,"java");
+        break;
+        case "c++": saveTextAsFile(file_para,"cpp");
+        break;
+        case "php": saveTextAsFile(file_para,"php");
+        break;
+        case "markdown": saveTextAsFile(file_para,"md");
+        break      
+        case "plaintext": saveTextAsFile(file_para,"txt");
+        break      
 
-   });
-
-   function saveTextAsFile(file,type){
-    var textToWrite = editor.getValue();
+      }
+    function saveTextAsFile(file,type){
+    var textToWrite = txt_for_down;
     var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
     var fileNameToSaveAs =file+"."+type;
     var downloadLink = document.createElement("a");
@@ -76,35 +118,10 @@ editor.setSize(540, 200);
     }
     downloadLink.click();
   }
-    $('.save').click(function(){
-      console.log("haii");
-   var type=document.getElementById('language');
-   type=type.options[type.selectedIndex].value;
-   file_name=document.getElementById('fileName').value;
-   console.log(file_name);
-   if(file_name=="")
-   {
-    file_para="program";
-   }
-   else
-   {
-    file_para=file_name;
-   }
-   switch(type){
-    case "c": saveTextAsFile(file_para,"c");
-    break;
-    case "java": saveTextAsFile(file_para,"java");
-    break;
-    case "c++": saveTextAsFile(file_para,"cpp");
-    break;
-    case "php": saveTextAsFile(file_para,"php");
-    break;
-    case "markdown": saveTextAsFile(file_parae,"md");
-    break      
-    case "plaintext": saveTextAsFile(file_para,"txt");
-    break      
-
-  }
 });
+});
+     
+   
+
 
   
