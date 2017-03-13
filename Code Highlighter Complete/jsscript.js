@@ -5,16 +5,15 @@ var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
   indentUnit: 4
 });
 editor.focus();
-editor.setCursor(editor.lineCount(), 0);
-editor.setSize(560, 200);
+editor.setSize(540, 200);
 var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
   lineNumbers: false,
   highlightMatches: true,
   stylesheet: "lib/jscolors.css",
   indentUnit: 4
 });
-
-
+editor1.focus();
+editor1.setSize(540, 200);
    //Adding code to div
    //$("#save").hide();
    //$("#edit").hide();
@@ -30,9 +29,8 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
      //$("#save").show();
      //$("#edit").show();
      // $('#buttons').show();
-
      var program=editor.getValue();
-     var code_div = $(".code");
+     var code_div = document.getElementsByClassName("code");
      var icon = $("#buttons");
      if($(code_div).children().length<1){
       $(code_div).append(program);
@@ -43,13 +41,12 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
       code_div.setAttribute('class','code');
       // code_div.setAttribute('id',ids);
       code_div.innerHTML = program;
-      debugger;
       $(".code").last().after(code_div);
       // $("#"+ids).append(new_ele);
       console.log("else");
     }
     $(code_div).each(function() {
-      
+      debugger;
       var $this = $(this),
       $code = $this.html(),
       $unescaped = $('<div/>').html($code).text();
@@ -69,23 +66,19 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
      
      $('.edit').click(function(event){
       $('#edit_modal').modal('show');
-             editor1.setValue("");
-
        edit_div=$(this).parents('div.pre_icons').siblings('div.CodeMirror').find('div.CodeMirror-code');
        edit_code = $(edit_div).clone();
        content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
        txt_for_update=$(edit_code).text();
        console.log(txt_for_update);
-       editor1.setValue("");
        editor1.setValue(txt_for_update);
       });
       $('#update_code').click(function(){
         $('#edit_modal').modal('hide');
-        debugger;
         console.log("updated clicked");
         console.log(edit_div);
         updated_text=editor1.getValue();
-        $(edit_div).html(updated_text);
+        $(edit_div).text(updated_text);
            //$(code_div).innerHTML(txt_for_update);
         });
      $('.save').click(function(){

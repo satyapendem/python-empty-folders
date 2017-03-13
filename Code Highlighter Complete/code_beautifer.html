@@ -75,6 +75,7 @@
           }
           else{
             $("#box").show();
+            $("#show").html(program);
             $("#show").each(function() {
               var $this = $(this),
               $code = $this.html(),
@@ -83,6 +84,7 @@
               CodeMirror(this, {
                 value: $unescaped,
                 lineNumbers: true,
+                highlightMatches: true,
                 readOnly: "nocursor"
               });   
             });
