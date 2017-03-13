@@ -13,8 +13,11 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
   stylesheet: "lib/jscolors.css",
   indentUnit: 4
 });
-
-
+editor1.focus();
+editor1.setCursor(editor1.lineCount(), 0);
+editor1.setSize(560, 200);
+   file_name=document.getElementById('fileName').value;
+    console.log(file_name)
    //Adding code to div
    //$("#save").hide();
    //$("#edit").hide();
@@ -43,7 +46,7 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
       code_div.setAttribute('class','code');
       // code_div.setAttribute('id',ids);
       code_div.innerHTML = program;
-      debugger;
+      //debugger;
       $(".code").last().after(code_div);
       // $("#"+ids).append(new_ele);
       console.log("else");
@@ -66,13 +69,15 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
      //new_ele.removeAttr('id');
      $(code_div).append(new_ele);
      /*Click events for edit and download*/
+   });  
      
-     $('.edit').click(function(event){
+     $(document).on('click','.edit', function(event){
       $('#edit_modal').modal('show');
-             editor1.setValue("");
-
+      editor1.setValue("");
+      for_update=$(this).parents(".code");
        edit_div=$(this).parents('div.pre_icons').siblings('div.CodeMirror').find('div.CodeMirror-code');
        edit_code = $(edit_div).clone();
+        document.getElementById("Up_fileName").value=file_name;
        content_code = $(edit_code).find('div.CodeMirror-linenumber').remove();
        txt_for_update=$(edit_code).text();
        console.log(txt_for_update);
@@ -81,12 +86,29 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
       });
       $('#update_code').click(function(){
         $('#edit_modal').modal('hide');
-        debugger;
-        console.log("updated clicked");
-        console.log(edit_div);
+        //debugger;
         updated_text=editor1.getValue();
-        $(edit_div).html(updated_text);
+        debugger;
+        $(for_update).find('.CodeMirror').remove();
+        update_div = document.createElement('div');
+        update_div.innerHTML = updated_text;
+        
+         //for_update = $(edit_div).parents().find('.code');
+         $(for_update).prepend(update_div);        
+        //$(edit_div).html(updated_text);
            //$(code_div).innerHTML(txt_for_update);
+           $(update_div).each(function() {
+         var $this = $(this),
+         $code = $this.html(),
+         $unescaped = $('<div/>').html($code).text();
+         $this.empty();
+         CodeMirror(this, {
+          value: $unescaped,
+          lineNumbers: true,
+          theme: "neo",
+          readOnly: "nocursor"
+        });   
+       });
         });
      $('.save').click(function(){
       down_div=$(this).parents('div.pre_icons').siblings('div.CodeMirror').find('div.CodeMirror-code');
@@ -141,7 +163,7 @@ var editor1 = CodeMirror.fromTextArea(document.getElementById("code_update"), {
         downloadLink.click();
        }
      });
-    });
+   
 
    
 
